@@ -6,6 +6,7 @@ import Login from "./containers/Login";
 import Signup from "./containers/Signup";
 import NewImage from "./containers/NewImage";
 import NotFound from "./containers/NotFound";
+import Images from "./containers/Images";
 
 export default function Routes() {
   return (
@@ -21,6 +22,9 @@ export default function Routes() {
       </Route>
       <Route exact path="/images/new">
         <NewImage />
+      </Route>
+      <Route exact path="/images/:id">
+        <Images />
       </Route>
       {/* Finally, catch all unmatched routes */}
       <Route>

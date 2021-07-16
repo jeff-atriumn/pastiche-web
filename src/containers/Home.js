@@ -45,9 +45,10 @@ export default function Home() {
             <span className="ml-2 font-weight-bold">Create a new image</span>
           </ListGroup.Item>
         </LinkContainer>
-        {images.map(({ imageId, createdAt }) => (
+        {images.map(({ image, imageId, createdAt }) => (
           <LinkContainer key={imageId} to={`/images/${imageId}`}>
             <ListGroup.Item action>
+              <span className="text-muted">Image Name: {image}</span>
               <span className="font-weight-bold">{imageId}</span>
               <br />
               <span className="text-muted">
