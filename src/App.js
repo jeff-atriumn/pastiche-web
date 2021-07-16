@@ -8,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import "./App.css";
 import Routes from "./Routes";
 import { AppContext } from "./libs/contextLib";
+import { onError } from "./libs/errorLib";
 
 function App() {
   const [isAuthenticated, userHasAuthenticated] = useState(false);
@@ -24,7 +25,7 @@ function App() {
       userHasAuthenticated(true);
     } catch (e) {
       if (e !== "No current user") {
-        alert(e);
+        onError(e);
       }
     }
 
