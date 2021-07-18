@@ -70,21 +70,22 @@ function DropdownScrollNavbar() {
             <DropdownMenu aria-labelledby="navbarDropdown">
               <DropdownItem header>Dropdown header</DropdownItem>
               <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
-                Action
+                Featured Snapshots
               </DropdownItem>
               <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
-                Another action
-              </DropdownItem>
-              <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
-                Something else here
+                All Snapshots
               </DropdownItem>
               <DropdownItem divider></DropdownItem>
               <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
-                Separated link
+                My Snapshots
               </DropdownItem>
               <DropdownItem divider></DropdownItem>
               <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
-                One more separated link
+                My Profile
+              </DropdownItem>
+              <DropdownItem divider></DropdownItem>
+              <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+                Settings
               </DropdownItem>
             </DropdownMenu>
           </UncontrolledDropdown>

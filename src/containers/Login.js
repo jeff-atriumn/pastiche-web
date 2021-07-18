@@ -1,18 +1,4 @@
 import React, { useState } from "react";
-
-import { Auth } from "aws-amplify";
-// import Form from "react-bootstrap/Form";
-
-import DropdownScrollNavbar from "../components/Navbars/DropdownScrollNavbar.js";
-import Footer from "../components/Footers/Footer.js";
-
-import LoaderButton from "../components/LoaderButton";
-import { useAppContext } from "../libs/contextLib";
-import { useFormFields } from "../libs/hooksLib";
-import { onError } from "../libs/errorLib";
-import "./Login.css";
-
-// reactstrap components
 import {
   Card,
   CardHeader,
@@ -27,6 +13,14 @@ import {
   Col,
   Row,
 } from "reactstrap";
+
+import { Auth } from "aws-amplify";
+
+import LoaderButton from "../components/LoaderButton";
+import { useAppContext } from "../libs/contextLib";
+import { useFormFields } from "../libs/hooksLib";
+import { onError } from "../libs/errorLib";
+import "./Login.css";
 
 export default function Login() {
   const [firstFocus, setFirstFocus] = React.useState(false);
@@ -68,101 +62,80 @@ export default function Login() {
 
   return (
     <>
-      {/* <DropdownScrollNavbar /> */}
-      <div className="page-header header-filter" filter-color="blue">
-        <div
-          className="page-header-image"
-          style={{
-            backgroundImage:
-              "url(" + require("../assets/img/login.jpg").default + ")",
-          }}
-        ></div>
-        <div className="content">
-          <Container>
-            <Row>
-              <Col className="ml-auto mr-auto" md="5">
-                <Card className="card-login card-plain">
-                  <Form
-                    // action=""
-                    // className="form"
-                    // method=""
-                    onSubmit={handleSubmit}
+      <Container>
+        <Row>
+          <Col className="ml-auto mr-auto" md="5">
+            <Card className="card-login card-plain">
+              <Form onSubmit={handleSubmit}>
+                <CardHeader className="text-center">
+                  <div className="logo-container">
+                    <img
+                      alt="..."
+                      src={require("../assets/img/now-logo.png").default}
+                    ></img>
+                  </div>
+                </CardHeader>
+                <CardBody>
+                  <InputGroup
+                    className={
+                      "no-border input-lg" +
+                      (firstFocus ? " input-group-focus" : "")
+                    }
                   >
-                    <CardHeader className="text-center">
-                      <div className="logo-container">
-                        <img
-                          alt="..."
-                          src={require("../assets/img/now-logo.png").default}
-                        ></img>
-                      </div>
-                    </CardHeader>
-                    <CardBody>
-                      <InputGroup
-                        className={
-                          "no-border input-lg" +
-                          (firstFocus ? " input-group-focus" : "")
-                        }
-                      >
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                            <i className="now-ui-icons users_circle-08"></i>
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input
-                          placeholder="Email Address"
-                          type="email"
-                          id="email"
-                          value={fields.email}
-                          onFocus={() => setFirstFocus(true)}
-                          onBlur={() => setFirstFocus(false)}
-                          onChange={handleFieldChange}
-                        ></Input>
-                      </InputGroup>
-                      <InputGroup
-                        className={
-                          "no-border input-lg" +
-                          (lastFocus ? " input-group-focus" : "")
-                        }
-                      >
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                            <i className="now-ui-icons text_caps-small"></i>
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input
-                          placeholder="Password"
-                          type="password"
-                          id="password"
-                          value={fields.password}
-                          onFocus={() => setLastFocus(true)}
-                          onBlur={() => setLastFocus(false)}
-                          onChange={handleFieldChange}
-                        ></Input>
-                      </InputGroup>
-                    </CardBody>
-                    <CardFooter className="text-center">
-                      <LoaderButton
-                        block
-                        size="lg"
-                        type="submit"
-                        isLoading={isLoading}
-                        disabled={!validateForm()}
-                        className="btn-round"
-                        // color="info"
-                        // href="login"
-                        // onClick={(e) => e.preventDefault()}
-                      >
-                        Login
-                      </LoaderButton>
-                    </CardFooter>
-                  </Form>
-                </Card>
-              </Col>
-            </Row>
-          </Container>
-        </div>
-        <Footer />
-      </div>
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="now-ui-icons users_circle-08"></i>
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      placeholder="Email Address"
+                      type="email"
+                      id="email"
+                      value={fields.email}
+                      onFocus={() => setFirstFocus(true)}
+                      onBlur={() => setFirstFocus(false)}
+                      onChange={handleFieldChange}
+                    ></Input>
+                  </InputGroup>
+                  <InputGroup
+                    className={
+                      "no-border input-lg" +
+                      (lastFocus ? " input-group-focus" : "")
+                    }
+                  >
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <i className="now-ui-icons text_caps-small"></i>
+                      </InputGroupText>
+                    </InputGroupAddon>
+                    <Input
+                      placeholder="Password"
+                      type="password"
+                      id="password"
+                      value={fields.password}
+                      onFocus={() => setLastFocus(true)}
+                      onBlur={() => setLastFocus(false)}
+                      onChange={handleFieldChange}
+                    ></Input>
+                  </InputGroup>
+                </CardBody>
+                <CardFooter className="text-center">
+                  <LoaderButton
+                    block
+                    size="lg"
+                    type="submit"
+                    isLoading={isLoading}
+                    disabled={!validateForm()}
+                    className="btn-round"
+                  >
+                    Login
+                  </LoaderButton>
+                </CardFooter>
+              </Form>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }

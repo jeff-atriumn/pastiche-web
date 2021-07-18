@@ -9,7 +9,7 @@ import { onError } from "../libs/errorLib";
 import "./Home.css";
 
 export default function Home() {
-  const [notes, setImages] = useState([]);
+  const [images, setImages] = useState([]);
   const { isAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -64,17 +64,17 @@ export default function Home() {
   function renderLander() {
     return (
       <div className="lander">
-        <h1>Scratch</h1>
-        <p className="text-muted">A simple note taking app</p>
+        <h1>Atriumn</h1>
+        <p>A simple note taking app</p>
       </div>
     );
   }
 
   function renderImages() {
     return (
-      <div className="notes">
-        <h2 className="pb-3 mt-4 mb-3 border-bottom">Your Notes</h2>
-        <ListGroup>{!isLoading && renderImagesList(notes)}</ListGroup>
+      <div className="images">
+        <h2 className="pb-3 mt-4 mb-3 border-bottom">Your Images</h2>
+        <ListGroup>{!isLoading && renderImagesList(images)}</ListGroup>
       </div>
     );
   }
