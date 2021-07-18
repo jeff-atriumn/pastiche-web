@@ -1,16 +1,15 @@
-import React from "react";
-// import React, { useState } from "react";
-//
-// import { Auth } from "aws-amplify";
+import React, { useState } from "react";
+
+import { Auth } from "aws-amplify";
 // import Form from "react-bootstrap/Form";
 
-// import DropdownScrollNavbar from "components/Navbars/DropdownScrollNavbar.js";
-// import Footer from "components/Footers/Footer.js";
+import DropdownScrollNavbar from "../components/Navbars/DropdownScrollNavbar.js";
+import Footer from "../components/Footers/Footer.js";
 
 // import LoaderButton from "../components/LoaderButton";
-// import { useAppContext } from "../libs/contextLib";
-// import { useFormFields } from "../libs/hooksLib";
-// import { onError } from "../libs/errorLib";
+import { useAppContext } from "../libs/contextLib";
+import { useFormFields } from "../libs/hooksLib";
+import { onError } from "../libs/errorLib";
 import "./Login.css";
 
 // reactstrap components
@@ -31,15 +30,14 @@ import {
 } from "reactstrap";
 
 export default function Login() {
-  // const { userHasAuthenticated } = useAppContext();
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [fields, handleFieldChange] = useFormFields({
-  //   email: "",
-  //   password: "",
-  // });
-
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
+  const { userHasAuthenticated } = useAppContext();
+  // const [isLoading, setIsLoading] = useState(false);
+  const [fields, handleFieldChange] = useFormFields({
+    email: "",
+    password: "",
+  });
 
   React.useEffect(() => {
     document.body.classList.add("login-page");
@@ -53,27 +51,25 @@ export default function Login() {
     };
   }, []);
 
-  // function validateForm() {
-  //   return fields.email.length > 0 && fields.password.length > 0;
-  // }
+  function validateForm() {
+    return fields.email.length > 0 && fields.password.length > 0;
+  }
 
-  // async function handleSubmit(event) {
-  //   event.preventDefault();
-
-  //   setIsLoading(true);
-
-  //   try {
-  //     await Auth.signIn(fields.email, fields.password);
-  //     userHasAuthenticated(true);
-  //   } catch (e) {
-  //     onError(e);
-  //     setIsLoading(false);
-  //   }
-  // }
+  async function handleSubmit(event) {
+    event.preventDefault();
+    // setIsLoading(true);
+    try {
+      await Auth.signIn(fields.email, fields.password);
+      userHasAuthenticated(true);
+    } catch (e) {
+      onError(e);
+      // setIsLoading(false);
+    }
+  }
 
   return (
     <>
-      {/* <DropdownScrollNavbar /> */}
+      <DropdownScrollNavbar />
       <div className="page-header header-filter" filter-color="blue">
         <div
           className="page-header-image"
@@ -87,7 +83,12 @@ export default function Login() {
             <Row>
               <Col className="ml-auto mr-auto" md="5">
                 <Card className="card-login card-plain">
-                  <Form action="" className="form" method="">
+                  <Form
+                    // action=""
+                    // className="form"
+                    // method=""
+                    onSubmit={handleSubmit}
+                  >
                     <CardHeader className="text-center">
                       <div className="logo-container">
                         <img
@@ -109,10 +110,13 @@ export default function Login() {
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input
-                          placeholder="First Name..."
-                          type="text"
+                          placeholder="Email Address"
+                          type="email"
+                          id="email"
+                          value={fields.email}
                           onFocus={() => setFirstFocus(true)}
                           onBlur={() => setFirstFocus(false)}
+                          onChange={handleFieldChange}
                         ></Input>
                       </InputGroup>
                       <InputGroup
@@ -127,23 +131,29 @@ export default function Login() {
                           </InputGroupText>
                         </InputGroupAddon>
                         <Input
-                          placeholder="Last Name..."
-                          type="text"
+                          placeholder="Password"
+                          type="password"
+                          id="password"
+                          value={fields.password}
                           onFocus={() => setLastFocus(true)}
                           onBlur={() => setLastFocus(false)}
+                          onChange={handleFieldChange}
                         ></Input>
                       </InputGroup>
                     </CardBody>
                     <CardFooter className="text-center">
                       <Button
                         block
+                        type="submit"
+                        // isloading={isLoading}
+                        disabled={!validateForm()}
                         className="btn-round"
                         color="info"
-                        href="#pablo"
+                        href="login"
                         onClick={(e) => e.preventDefault()}
                         size="lg"
                       >
-                        Get Started
+                        Login
                       </Button>
                     </CardFooter>
                   </Form>
@@ -152,7 +162,7 @@ export default function Login() {
             </Row>
           </Container>
         </div>
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </>
   );
