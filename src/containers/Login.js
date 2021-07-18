@@ -6,7 +6,7 @@ import { Auth } from "aws-amplify";
 import DropdownScrollNavbar from "../components/Navbars/DropdownScrollNavbar.js";
 import Footer from "../components/Footers/Footer.js";
 
-// import LoaderButton from "../components/LoaderButton";
+import LoaderButton from "../components/LoaderButton";
 import { useAppContext } from "../libs/contextLib";
 import { useFormFields } from "../libs/hooksLib";
 import { onError } from "../libs/errorLib";
@@ -14,7 +14,6 @@ import "./Login.css";
 
 // reactstrap components
 import {
-  Button,
   Card,
   CardHeader,
   CardBody,
@@ -33,7 +32,7 @@ export default function Login() {
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
   const { userHasAuthenticated } = useAppContext();
-  // const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
     email: "",
     password: "",
@@ -57,19 +56,19 @@ export default function Login() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    // setIsLoading(true);
+    setIsLoading(true);
     try {
       await Auth.signIn(fields.email, fields.password);
       userHasAuthenticated(true);
     } catch (e) {
       onError(e);
-      // setIsLoading(false);
+      setIsLoading(false);
     }
   }
 
   return (
     <>
-      <DropdownScrollNavbar />
+      {/* <DropdownScrollNavbar /> */}
       <div className="page-header header-filter" filter-color="blue">
         <div
           className="page-header-image"
@@ -142,19 +141,19 @@ export default function Login() {
                       </InputGroup>
                     </CardBody>
                     <CardFooter className="text-center">
-                      <Button
+                      <LoaderButton
                         block
+                        size="lg"
                         type="submit"
-                        // isloading={isLoading}
+                        isLoading={isLoading}
                         disabled={!validateForm()}
                         className="btn-round"
-                        color="info"
-                        href="login"
-                        onClick={(e) => e.preventDefault()}
-                        size="lg"
+                        // color="info"
+                        // href="login"
+                        // onClick={(e) => e.preventDefault()}
                       >
                         Login
-                      </Button>
+                      </LoaderButton>
                     </CardFooter>
                   </Form>
                 </Card>
