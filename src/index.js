@@ -6,7 +6,13 @@ import reportWebVitals from "./reportWebVitals";
 
 import { Amplify } from "aws-amplify";
 import config from "./config";
-import "./index.css";
+// import "./index.css";
+
+import "./assets/css/bootstrap.min.css";
+import "./assets/scss/now-ui-kit.scss";
+// import "./assets/demo/demo.css";
+// import "./assets/demo/react-demo.css";
+// import "./assets/demo/nucleo-icons-page-styles.css";
 
 Amplify.configure({
   Auth: {
