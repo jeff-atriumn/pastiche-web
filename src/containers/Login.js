@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Card,
   CardHeader,
@@ -130,6 +131,20 @@ export default function Login() {
                   >
                     Login
                   </LoaderButton>
+                  <div className="pull-left">
+                    <h6>
+                      <Link to="/signup" className="link footer-link">
+                        <p>Create Account</p>
+                      </Link>
+                    </h6>
+                  </div>
+                  <div className="pull-right">
+                    <h6>
+                      <Link to="/signup" className="link footer-link">
+                        <p>Need Help?</p>
+                      </Link>
+                    </h6>
+                  </div>
                 </CardFooter>
               </Form>
             </Card>
