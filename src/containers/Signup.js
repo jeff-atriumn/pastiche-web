@@ -45,7 +45,7 @@ export default function Signup() {
     password: "",
     confirmPassword: "",
     confirmationCode: "",
-    termsAndConditions: "",
+    termsAndConditions: false,
   });
 
   React.useEffect(() => {
@@ -66,8 +66,8 @@ export default function Signup() {
       fields.lastName.length > 0 &&
       fields.email.length > 0 &&
       fields.password.length > 0 &&
-      fields.password === fields.confirmPassword &&
-      fields.termsAndConditions === "checked"
+      fields.password === fields.confirmPassword
+      // fields.termsAndConditions === true
     );
   }
 
@@ -281,11 +281,12 @@ export default function Signup() {
                         onChange={handleFieldChange}
                       ></Input>
                     </InputGroup>
-                    <FormGroup check>
+                    {/* <FormGroup check>
                       <Label check>
                         <Input
                           type="checkbox"
-                          value={fields.termsAndConditions}
+                          defaultChecked={fields.termsAndConditions}
+                          onChange={handleFieldChange}
                         ></Input>
                         <span className="form-check-sign"></span>I agree to the
                         terms and{" "}
@@ -294,7 +295,7 @@ export default function Signup() {
                         </a>
                         .
                       </Label>
-                    </FormGroup>
+                    </FormGroup> */}
                     <CardFooter className="text-center">
                       <LoaderButton
                         block
