@@ -26,10 +26,10 @@ export default function Routes() {
       <AuthenticatedRoute exact path="/settings">
         <Settings />
       </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/images/new">
+      <AuthenticatedRoute exact path="/portraits/new">
         <NewImage />
       </AuthenticatedRoute>
-      <AuthenticatedRoute exact path="/images/:id">
+      <AuthenticatedRoute exact path="/portraits/:id">
         <Images />
       </AuthenticatedRoute>
       {/* Finally, catch all unmatched routes */}

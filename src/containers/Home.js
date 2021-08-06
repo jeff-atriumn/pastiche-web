@@ -9,7 +9,7 @@ import { onError } from "../libs/errorLib";
 import "./Home.css";
 
 export default function Home() {
-  const [notes, setImages] = useState([]);
+  const [portraits, setPortraits] = useState([]);
   const { isAuthenticated } = useAppContext();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -20,8 +20,8 @@ export default function Home() {
       }
 
       try {
-        const images = await loadImages();
-        setImages(images);
+        const portraits = await loadPortraits();
+        setPortraits(portraits);
       } catch (e) {
         onError(e);
       }
@@ -32,24 +32,24 @@ export default function Home() {
     onLoad();
   }, [isAuthenticated]);
 
-  function loadImages() {
-    return API.get("images", "/images");
+  function loadPortraits() {
+    return API.get("portraits", "/portraits");
   }
 
-  function renderImagesList(images) {
+  function renderPortraitsList(portraits) {
     return (
       <>
-        <LinkContainer to="/images/new">
+        <LinkContainer to="/portraits/new">
           <ListGroup.Item action className="py-3 text-nowrap text-truncate">
             <BsPencilSquare size={17} />
-            <span className="ml-2 font-weight-bold">Create a new image</span>
+            <span className="ml-2 font-weight-bold">Create a new portrait</span>
           </ListGroup.Item>
         </LinkContainer>
-        {images.map(({ image, imageId, createdAt }) => (
-          <LinkContainer key={imageId} to={`/images/${imageId}`}>
+        {portraits.map(({ portrait, portraitId, createdAt }) => (
+          <LinkContainer key={portraitId} to={`/portraits/${portraitId}`}>
             <ListGroup.Item action>
-              <span className="text-muted">Image Name: {image}</span>
-              <span className="font-weight-bold">{imageId}</span>
+              <span className="text-muted">Portrait Name: {portrait}</span>
+              <span className="font-weight-bold">{portraitId}</span>
               <br />
               <span className="text-muted">
                 Created: {new Date(createdAt).toLocaleString()}
@@ -64,24 +64,24 @@ export default function Home() {
   function renderLander() {
     return (
       <div className="lander">
-        <h1>Scratch</h1>
-        <p className="text-muted">A simple note taking app</p>
+        <h1>Atriumn</h1>
+        <p>A simple note taking app</p>
       </div>
     );
   }
 
-  function renderImages() {
+  function renderPortraits() {
     return (
-      <div className="notes">
-        <h2 className="pb-3 mt-4 mb-3 border-bottom">Your Notes</h2>
-        <ListGroup>{!isLoading && renderImagesList(notes)}</ListGroup>
+      <div className="portraits">
+        <h2 className="pb-3 mt-4 mb-3 border-bottom">Your Portraits</h2>
+        <ListGroup>{!isLoading && renderPortraitsList(portraits)}</ListGroup>
       </div>
     );
   }
 
   return (
     <div className="Home">
-      {isAuthenticated ? renderImages() : renderLander()}
+      {isAuthenticated ? renderPortraits() : renderLander()}
     </div>
   );
 }

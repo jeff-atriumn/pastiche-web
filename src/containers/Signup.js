@@ -1,5 +1,22 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
+import {
+  // Button,
+  Card,
+  CardBody,
+  CardFooter,
+  CardTitle,
+  Label,
+  FormGroup,
+  // Form,
+  Input,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
+  Container,
+  Row,
+  Col,
+} from "reactstrap";
 import { useHistory } from "react-router-dom";
 import { Auth } from "aws-amplify";
 
@@ -10,6 +27,17 @@ import { onError } from "../libs/errorLib";
 import "./Signup.css";
 
 export default function Signup() {
+  const history = useHistory();
+
+  const [firstFocus, setFirstFocus] = React.useState(false);
+  const [lastFocus, setLastFocus] = React.useState(false);
+  const [emailFocus, setEmailFocus] = React.useState(false);
+  const [passwordFocus, setPasswordFocus] = React.useState(false);
+  const [confirmFocus, setConfirmFocus] = React.useState(false);
+
+  const [newUser, setNewUser] = useState(null);
+  const { userHasAuthenticated } = useAppContext();
+  const [isLoading, setIsLoading] = useState(false);
   const [fields, handleFieldChange] = useFormFields({
     givenName: "",
     lastName: "",
@@ -17,11 +45,20 @@ export default function Signup() {
     password: "",
     confirmPassword: "",
     confirmationCode: "",
+    termsAndConditions: false,
   });
-  const history = useHistory();
-  const [newUser, setNewUser] = useState(null);
-  const { userHasAuthenticated } = useAppContext();
-  const [isLoading, setIsLoading] = useState(false);
+
+  React.useEffect(() => {
+    document.body.classList.add("signup-page");
+    document.body.classList.add("sidebar-collapse");
+    document.documentElement.classList.remove("nav-open");
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    return function cleanup() {
+      document.body.classList.remove("signup-page");
+      document.body.classList.remove("sidebar-collapse");
+    };
+  }, []);
 
   function validateForm() {
     return (
@@ -30,6 +67,7 @@ export default function Signup() {
       fields.email.length > 0 &&
       fields.password.length > 0 &&
       fields.password === fields.confirmPassword
+      // fields.termsAndConditions === true
     );
   }
 
@@ -105,59 +143,179 @@ export default function Signup() {
 
   function renderForm() {
     return (
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="givenName" size="lg">
-          <Form.Label>First Name</Form.Label>
-          <Form.Control
-            autoFocus
-            type="text"
-            value={fields.givenName}
-            onChange={handleFieldChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="lastName" size="lg">
-          <Form.Label>Last Name</Form.Label>
-          <Form.Control
-            type="text"
-            value={fields.lastName}
-            onChange={handleFieldChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="email" size="lg">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            value={fields.email}
-            onChange={handleFieldChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="password" size="lg">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            value={fields.password}
-            onChange={handleFieldChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="confirmPassword" size="lg">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type="password"
-            onChange={handleFieldChange}
-            value={fields.confirmPassword}
-          />
-        </Form.Group>
-        <LoaderButton
-          block
-          size="lg"
-          type="submit"
-          variant="success"
-          isLoading={isLoading}
-          disabled={!validateForm()}
-        >
-          Signup
-        </LoaderButton>
-      </Form>
+      <>
+        <Container>
+          <Row>
+            <Col className="ml-auto mr-auto" md="6" lg="4">
+              <div className="info info-horizontal">
+                <div className="icon icon-info">
+                  <i className="now-ui-icons media-2_sound-wave"></i>
+                </div>
+                <div className="description">
+                  <h5 className="info-title">Marketing</h5>
+                  <p className="description">
+                    We've created the marketing campaign of the website. It was
+                    a very interesting collaboration.
+                  </p>
+                </div>
+              </div>
+              <div className="info info-horizontal">
+                <div className="icon icon-info">
+                  <i className="now-ui-icons media-1_button-pause"></i>
+                </div>
+                <div className="description">
+                  <h5 className="info-title">Fully Coded in React 16</h5>
+                  <p className="description">
+                    We've developed the website with React 16 and CSS3. The
+                    client has access to the code using GitHub.
+                  </p>
+                </div>
+              </div>
+              <div className="info info-horizontal">
+                <div className="icon icon-info">
+                  <i className="now-ui-icons users_single-02"></i>
+                </div>
+                <div className="description">
+                  <h5 className="info-title">Built Audience</h5>
+                  <p className="description">
+                    There is also a Fully Customizable CMS Admin Dashboard for
+                    this product.
+                  </p>
+                </div>
+              </div>
+            </Col>
+            <Col className="mr-auto" md="6" lg="4">
+              <Card className="card-signup">
+                <Form onSubmit={handleSubmit}>
+                  <CardBody>
+                    <CardTitle className="text-center" tag="h4">
+                      Register
+                    </CardTitle>
+                    <InputGroup
+                      className={firstFocus ? "input-group-focus" : ""}
+                    >
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="now-ui-icons users_circle-08"></i>
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        placeholder="First Name"
+                        type="text"
+                        id="givenName"
+                        value={fields.givenName}
+                        onFocus={() => setFirstFocus(true)}
+                        onBlur={() => setFirstFocus(false)}
+                        onChange={handleFieldChange}
+                      ></Input>
+                    </InputGroup>
+                    <InputGroup
+                      className={lastFocus ? "input-group-focus" : ""}
+                    >
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="now-ui-icons text_caps-small"></i>
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        placeholder="Last Name"
+                        type="text"
+                        id="lastName"
+                        onFocus={() => setLastFocus(true)}
+                        onBlur={() => setLastFocus(false)}
+                        value={fields.lastName}
+                        onChange={handleFieldChange}
+                      ></Input>
+                    </InputGroup>
+                    <InputGroup
+                      className={emailFocus ? "input-group-focus" : ""}
+                    >
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="now-ui-icons ui-1_email-85"></i>
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        placeholder="Email Address"
+                        type="email"
+                        id="email"
+                        value={fields.email}
+                        onFocus={() => setEmailFocus(true)}
+                        onBlur={() => setEmailFocus(false)}
+                        onChange={handleFieldChange}
+                      ></Input>
+                    </InputGroup>
+                    <InputGroup
+                      className={passwordFocus ? "input-group-focus" : ""}
+                    >
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="now-ui-icons ui-1_lock-circle-open"></i>
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        placeholder="Password"
+                        type="password"
+                        id="password"
+                        onFocus={() => setPasswordFocus(true)}
+                        onBlur={() => setPasswordFocus(false)}
+                        value={fields.password}
+                        onChange={handleFieldChange}
+                      ></Input>
+                    </InputGroup>
+                    <InputGroup
+                      className={confirmFocus ? "input-group-focus" : ""}
+                    >
+                      <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                          <i className="now-ui-icons ui-1_lock-circle-open"></i>
+                        </InputGroupText>
+                      </InputGroupAddon>
+                      <Input
+                        placeholder="Confirm Password"
+                        type="password"
+                        id="confirmPassword"
+                        onFocus={() => setConfirmFocus(true)}
+                        onBlur={() => setConfirmFocus(false)}
+                        value={fields.confirmPassword}
+                        onChange={handleFieldChange}
+                      ></Input>
+                    </InputGroup>
+                    {/* <FormGroup check>
+                      <Label check>
+                        <Input
+                          type="checkbox"
+                          defaultChecked={fields.termsAndConditions}
+                          onChange={handleFieldChange}
+                        ></Input>
+                        <span className="form-check-sign"></span>I agree to the
+                        terms and{" "}
+                        <a href="#pablo" onClick={(e) => e.preventDefault()}>
+                          conditions
+                        </a>
+                        .
+                      </Label>
+                    </FormGroup> */}
+                    <CardFooter className="text-center">
+                      <LoaderButton
+                        block
+                        className="btn-round"
+                        color="info"
+                        isLoading={isLoading}
+                        type="submit"
+                        disabled={!validateForm()}
+                        size="lg"
+                      >
+                        Get Started
+                      </LoaderButton>
+                    </CardFooter>
+                  </CardBody>
+                </Form>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
+      </>
     );
   }
 
