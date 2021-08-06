@@ -128,19 +128,33 @@ function App() {
                     >
                       All Snapshots
                     </DropdownItem>
-                    <DropdownItem divider></DropdownItem>
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      My Snapshots
-                    </DropdownItem>
-                    <DropdownItem
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      My Profile
-                    </DropdownItem>
+                    {isAuthenticated ? (
+                      <>
+                        <DropdownItem divider></DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          My Snapshots
+                        </DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          My Profile
+                        </DropdownItem>
+                      </>
+                    ) : (
+                      <>
+                        <DropdownItem divider></DropdownItem>
+                        <DropdownItem
+                          href="#pablo"
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          Login
+                        </DropdownItem>
+                      </>
+                    )}
                     <DropdownItem divider></DropdownItem>
                     <DropdownItem
                       href="#pablo"

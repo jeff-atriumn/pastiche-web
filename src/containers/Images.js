@@ -17,13 +17,13 @@ export default function Images() {
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    function loadImage() {
-      return API.get("images", `/images/${id}`);
+    function loadPortrait() {
+      return API.get("portraits", `/portraits/${id}`);
     }
 
     async function onLoad() {
       try {
-        const img = await loadImage();
+        const img = await loadPortrait();
         const { image } = img;
 
         if (image) {
@@ -45,7 +45,7 @@ export default function Images() {
   }
 
   function deleteImage() {
-    return API.del("images", `/images/${id}`);
+    return API.del("portraits", `/portraits/${id}`);
   }
 
   async function handleDelete(event) {
@@ -71,7 +71,7 @@ export default function Images() {
   }
 
   return (
-    <div className="Images">
+    <div className="Portraits">
       {image && (
         <Form>
           <Form.Group>

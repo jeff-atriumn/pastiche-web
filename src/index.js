@@ -30,7 +30,7 @@ Amplify.configure({
   API: {
     endpoints: [
       {
-        name: "images",
+        name: "portraits",
         endpoint: config.apiGateway.URL,
         region: config.apiGateway.REGION,
       },

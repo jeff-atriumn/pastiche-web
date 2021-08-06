@@ -44,7 +44,7 @@ export default function NewImage() {
   }
 
   function createImage(image) {
-    return API.post("images", "/images", {
+    return API.post("portraits", "/portraits", {
       body: image,
     });
   }
