@@ -115,7 +115,7 @@ function App() {
                     <span className="button-bar"></span>
                   </DropdownToggle>
                   <DropdownMenu aria-labelledby="navbarDropdown">
-                    <DropdownItem header>Atriumn</DropdownItem>
+                    <DropdownItem header>Pastiche</DropdownItem>
                     <DropdownItem
                       href="#pablo"
                       onClick={(e) => e.preventDefault()}
@@ -166,7 +166,7 @@ function App() {
                 </UncontrolledDropdown>
                 <div className="navbar-translate">
                   <NavbarBrand to="/" tag={Link} id="navbar-brand">
-                    Atriumn
+                    Pastiche
                   </NavbarBrand>
                   <button
                     onClick={() => {

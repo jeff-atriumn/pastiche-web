@@ -14,12 +14,12 @@ function Footer() {
           <nav>
             <ul>
               <li>
-                <a href="https://atriumn.com" target="_blank">
-                  Atriumn
+                <a href="https://pastiche.world" target="_blank">
+                  Pastiche
                 </a>
               </li>
               <li>
-                <a href="https://atriumn.com/about-us" target="_blank">
+                <a href="https://pastiche.world/about-us" target="_blank">
                   About Us
                 </a>
               </li>

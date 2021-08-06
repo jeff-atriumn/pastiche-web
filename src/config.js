@@ -3,7 +3,7 @@ const config = {
 
   s3: {
     REGION: "us-east-2",
-    BUCKET: "atriumn-upload",
+    BUCKET: "pastiche-upload",
   },
   apiGateway: {
     REGION: "us-east-2",
