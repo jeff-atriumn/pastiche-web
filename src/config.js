@@ -7,13 +7,13 @@ const config = {
   },
   apiGateway: {
     REGION: "us-east-2",
-    URL: "https://huir4kr64d.execute-api.us-east-2.amazonaws.com/prod",
+    URL: "https://pe56jofkmk.execute-api.us-east-2.amazonaws.com/prod",
   },
   cognito: {
     REGION: "us-east-2",
-    USER_POOL_ID: "us-east-2_4HEnjrK03",
-    APP_CLIENT_ID: "5q251lllbog57a52lqvdjinlec",
-    IDENTITY_POOL_ID: "us-east-2:bb503bbd-0abf-4be1-b1dc-c5baebac45a8",
+    USER_POOL_ID: "us-east-2_LDF62e9UX",
+    APP_CLIENT_ID: "6o4irf30gk45kpdt73ht7pf0gp",
+    IDENTITY_POOL_ID: "us-east-2:e639c93a-4e30-4010-9474-49429749eded",
   },
 };
 
